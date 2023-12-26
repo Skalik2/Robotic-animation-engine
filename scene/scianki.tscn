@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8tb6u4i1dq2e"]
+
+[ext_resource type="PackedScene" uid="uid://bdgr77icf3mt" path="res://Assets/scianki.glb" id="1_xcjfo"]
+
+[node name="scianki" instance=ExtResource("1_xcjfo")]
