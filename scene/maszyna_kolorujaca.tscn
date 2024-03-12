@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://cijhalhnq4ma3"]
+
+[ext_resource type="PackedScene" uid="uid://cb5fpak5uxnkb" path="res://Assets/maszyna-kolorujaca.glb" id="1_d32bk"]
+
+[sub_resource type="Animation" id="Animation_0axx6"]
+resource_name = "mlot_dol"
+length = 2.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mlotek")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 2.37325, 0, 2, 1, 0, 0.731327, 0)
+
+[sub_resource type="Animation" id="Animation_8htdd"]
+resource_name = "mlot_gora"
+length = 1.5
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mlotek")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.731327, 0, 1.5, 1, 0, 2.373, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h6cv4"]
+_data = {
+"mlot_dol": SubResource("Animation_0axx6"),
+"mlot_gora": SubResource("Animation_8htdd")
+}
+
+[node name="maszyna-kolorujaca" instance=ExtResource("1_d32bk")]
+
+[node name="Mlotek" parent="." index="1"]
+transform = Transform3D(0.427235, 0, 0, 0, 0.427235, 0, 0, 0, 0.427235, 0, 2.373, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_h6cv4")
+}

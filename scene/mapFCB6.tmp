@@ -1,0 +1,245 @@
+[gd_scene load_steps=16 format=3 uid="uid://crlkqwiimrnn6"]
+
+[ext_resource type="Script" path="res://scripts/CharacterBody3D.gd" id="1_5emks"]
+[ext_resource type="MeshLibrary" uid="uid://dduwntbrqau65" path="res://mesh/sciany mesh.tres" id="2_xyvnl"]
+[ext_resource type="Script" path="res://scripts/Kostka.gd" id="4_cswvn"]
+[ext_resource type="PackedScene" uid="uid://dt65e7dt4q1ke" path="res://scene/belt_long.tscn" id="6_5usv6"]
+[ext_resource type="PackedScene" uid="uid://cijhalhnq4ma3" path="res://scene/maszyna_kolorujaca.tscn" id="6_ehat4"]
+[ext_resource type="PackedScene" uid="uid://b1xeratmt55m3" path="res://scene/robot.tscn" id="6_n7oal"]
+[ext_resource type="PackedScene" uid="uid://c1a1dqmukobqb" path="res://Assets/kostka.glb" id="7_tw7jq"]
+[ext_resource type="PackedScene" uid="uid://cpbiva8a4mufs" path="res://scene/robot_y.tscn" id="8_rn3mu"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qh1ws"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_i17ok"]
+sky_material = SubResource("ProceduralSkyMaterial_qh1ws")
+
+[sub_resource type="Environment" id="Environment_dxbv6"]
+background_mode = 2
+sky = SubResource("Sky_i17ok")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lwyvm"]
+height = 1.8
+
+[sub_resource type="GDScript" id="GDScript_8qt5b"]
+script/source = "extends SpotLight3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ym13"]
+albedo_color = Color(0.858824, 0.403922, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_u28hi"]
+
+[node name="Mapa" type="Node3D"]
+
+[node name="stage" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.179078, 0)
+use_collision = true
+size = Vector3(10, 0.2, 10)
+
+[node name="enviroment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="enviroment"]
+environment = SubResource("Environment_dxbv6")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0205584, 0.0103059, -0.0118408)
+script = ExtResource("1_5emks")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.993456, 0)
+shape = SubResource("CapsuleShape3D_lwyvm")
+
+[node name="head" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00381279, 0, -0.190449)
+current = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CharacterBody3D/head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.394356, 0.454764)
+light_energy = 4.071
+spot_range = 7.25646
+spot_angle = 36.0138
+script = SubResource("GDScript_8qt5b")
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("2_xyvnl")
+cell_size = Vector3(1, 1, 1)
+cell_octant_size = 1
+cell_center_y = false
+data = {
+"cells": PackedInt32Array(65530, 0, 1, 65530, 65534, 1, 65530, 65532, 1, 65530, 65530, 1, 65528, 2, 1, 65528, 0, 1, 65528, 65534, 1, 65528, 65532, 1, 65528, 65530, 1, 65526, 2, 1, 65526, 0, 1, 65526, 65534, 1, 65526, 65532, 1, 65526, 65530, 1, 65524, 2, 1, 65524, 0, 1, 65524, 65534, 1, 65524, 65532, 1, 65524, 65530, 1, 65530, 4, 1441792, 65528, 4, 1441792, 65526, 4, 1441792, 65524, 4, 1441792, 65522, 4, 655362, 65522, 2, 655360, 65522, 0, 655360, 65522, 65534, 655360, 65522, 65532, 655360, 65522, 65530, 655360, 65522, 65528, 1048578, 65524, 65528, 1048576, 65526, 65528, 1048576, 65528, 65528, 1048576, 65530, 65528, 1048576, 65530, 2, 1, 65532, 65528, 1048576, 65532, 65530, 1048577, 65532, 65532, 1048577, 65532, 65534, 1048577, 65532, 0, 1048577, 65532, 2, 1048577, 65532, 4, 1441792)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="Kostka" type="StaticBody3D" parent="."]
+transform = Transform3D(0.297551, 0, 0, 0, 0.297551, 0, 0, 0, 0.297551, -4.01295, 0.505885, 3.91408)
+script = ExtResource("4_cswvn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Kostka"]
+material_override = SubResource("StandardMaterial3D_1ym13")
+mesh = SubResource("BoxMesh_u28hi")
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="Kostka"]
+polygon = PackedVector2Array(-0.501132, 0.500301, -0.500666, -0.501352, 0.501604, -0.502145, 0.499903, 0.50161)
+
+[node name="robot" parent="." instance=ExtResource("6_n7oal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, 4)
+
+[node name="Skeleton3D" parent="robot/Armature" index="1"]
+bones/1/rotation = Quaternion(0.00202915, 0.00202808, -0.707276, 0.706931)
+bones/2/rotation = Quaternion(-0.00528159, -0.0093328, -0.70737, 0.706762)
+bones/2/scale = Vector3(1, 1, 1)
+bones/3/rotation = Quaternion(0.0103351, -6.67578e-06, 0.999946, -0.00064404)
+bones/3/scale = Vector3(0.317066, 0.0568649, 0.0797477)
+bones/4/rotation = Quaternion(-0.707064, 0.00685249, 0.0077634, 0.707074)
+bones/4/scale = Vector3(0.303208, 0.152413, 0.303208)
+bones/5/rotation = Quaternion(0.0103351, -6.67577e-06, 0.999946, -0.00064404)
+bones/5/scale = Vector3(0.295268, 0.295268, 0.295268)
+bones/6/rotation = Quaternion(0.0103351, -6.67578e-06, 0.999946, -0.00064404)
+bones/6/scale = Vector3(0.0302536, 0.0302536, 0.0302536)
+bones/7/rotation = Quaternion(-0.707104, -0.00220141, -0.00185602, 0.707103)
+
+[node name="Cube_001" parent="robot/Armature/Skeleton3D" index="0"]
+transform = Transform3D(0.317066, 1.18507e-09, 0, 7.80251e-09, 0.0568649, -4.47926e-11, -2.32831e-09, 1.28466e-11, 0.0797477, 2.65266, 2.31698, 6.45456e-07)
+
+[node name="Cylinder_006-col" parent="robot/Armature/Skeleton3D" index="1"]
+transform = Transform3D(-0.303208, -2.49129e-08, 3.98436e-08, -5.36254e-08, -1.21931e-08, -0.303208, 5.07571e-08, -0.152413, 1.09994e-08, 2.65395, 3.43768, 7.40674e-07)
+
+[node name="Cylinder_007" parent="robot/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.295268, 6.19569e-09, 9.31323e-10, 7.27215e-09, 0.295268, -1.69166e-10, -1.86265e-09, 6.91216e-11, 0.295268, 2.65266, 2.43154, 6.51468e-07)
+
+[node name="Plane_005" parent="robot/Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.0302536, 6.29372e-10, 0, 7.42112e-10, 0.0302536, -1.71099e-11, -2.91038e-10, 6.87805e-12, 0.0302536, 2.59529, 2.27095, 1.41491e-07)
+
+[node name="Cylinder_003-col" parent="robot/Armature/Skeleton3D" index="4"]
+transform = Transform3D(8.97658e-08, -4.3256e-08, 0.303208, -0.303208, -5.72763e-08, 9.2471e-08, 5.72763e-08, -0.303208, -6.09055e-08, 3.44814e-07, 3.43897, 6.04306e-07)
+
+[node name="belt-long1" parent="." instance=ExtResource("6_5usv6")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -9.03809, 0, 3.94544)
+
+[node name="Start" type="Node3D" parent="belt-long1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.007, 0.576, 0)
+
+[node name="Koniec" type="Node3D" parent="belt-long1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.728, 0.576, 0)
+
+[node name="belt-long2" parent="." instance=ExtResource("6_5usv6")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.9735, 0, -4.73294)
+
+[node name="obramowka" parent="belt-long2" index="0"]
+transform = Transform3D(2.72286, 0, 0, 0, 0, -0.466402, 0, 1, 0, -2.26523, 0.5, -0.489161)
+
+[node name="tasma" parent="belt-long2" index="1"]
+transform = Transform3D(0.0840699, 0, 0, 0, 0.429667, 0, 0, 0, 0.429667, -1.00009, 0.364174, 0.00432548)
+
+[node name="Start" type="Node3D" parent="belt-long2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.91, 0.519803, 0)
+
+[node name="Stop" type="Node3D" parent="belt-long2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49, 0.52, 0)
+
+[node name="maszyna-kolorujaca" parent="." instance=ExtResource("6_ehat4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9199, 0.112725, -5.67059)
+
+[node name="Mlotek" parent="maszyna-kolorujaca" index="1"]
+transform = Transform3D(0.427235, 0, 0, 0, 0.427235, 0, 0, 0, 0.427235, 0, 2.38806, 0)
+
+[node name="belt-long3" parent="." instance=ExtResource("6_5usv6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.32507, -0.012139, -5.74601)
+
+[node name="obramowka" parent="belt-long3" index="0"]
+transform = Transform3D(2.72286, 0, 0, 0, 0, -0.466402, 0, 1, 0, -2.26523, 0.5, -0.489161)
+
+[node name="Start" type="Node3D" parent="belt-long3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.581, 0.382, 0.158)
+
+[node name="Stop" type="Node3D" parent="belt-long3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.858401, 0.382442, 0.157819)
+
+[node name="kostka" parent="." instance=ExtResource("7_tw7jq")]
+transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, -4.336, 0.343045, 6.13149)
+
+[node name="robot2" parent="." instance=ExtResource("6_n7oal")]
+transform = Transform3D(3.13916e-07, 0, 1, 0, 1, 0, -1, 0, 3.13916e-07, -6.43266, 0, -1.86539)
+
+[node name="Skeleton3D" parent="robot2/Armature" index="1"]
+bones/1/rotation = Quaternion(0.00202915, 0.00202808, -0.707276, 0.706931)
+bones/2/rotation = Quaternion(-0.00528159, -0.0093328, -0.70737, 0.706762)
+bones/2/scale = Vector3(1, 1, 1)
+bones/3/rotation = Quaternion(0.0103351, -6.67578e-06, 0.999946, -0.00064404)
+bones/3/scale = Vector3(0.317066, 0.0568649, 0.0797477)
+bones/4/rotation = Quaternion(-0.707064, 0.00685249, 0.0077634, 0.707074)
+bones/4/scale = Vector3(0.303208, 0.152413, 0.303208)
+bones/5/rotation = Quaternion(0.0103351, -6.67577e-06, 0.999946, -0.00064404)
+bones/5/scale = Vector3(0.295268, 0.295268, 0.295268)
+bones/6/rotation = Quaternion(0.0103351, -6.67578e-06, 0.999946, -0.00064404)
+bones/6/scale = Vector3(0.0302536, 0.0302536, 0.0302536)
+bones/7/rotation = Quaternion(-0.707104, -0.00220141, -0.00185602, 0.707103)
+
+[node name="Cube_001" parent="robot2/Armature/Skeleton3D" index="0"]
+transform = Transform3D(0.317066, 1.18507e-09, 0, 7.80251e-09, 0.0568649, -4.47926e-11, -2.32831e-09, 1.28466e-11, 0.0797477, 2.65266, 2.31698, 6.45456e-07)
+
+[node name="Cylinder_006-col" parent="robot2/Armature/Skeleton3D" index="1"]
+transform = Transform3D(-0.303208, -2.49129e-08, 3.98436e-08, -5.36254e-08, -1.21931e-08, -0.303208, 5.07571e-08, -0.152413, 1.09994e-08, 2.65395, 3.43768, 7.40674e-07)
+
+[node name="Cylinder_007" parent="robot2/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.295268, 6.19569e-09, 9.31323e-10, 7.27215e-09, 0.295268, -1.69166e-10, -1.86265e-09, 6.91216e-11, 0.295268, 2.65266, 2.43154, 6.51468e-07)
+
+[node name="Plane_005" parent="robot2/Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.0302536, 6.29372e-10, 0, 7.42112e-10, 0.0302536, -1.71099e-11, -2.91038e-10, 6.87805e-12, 0.0302536, 2.59529, 2.27095, 1.41491e-07)
+
+[node name="Cylinder_003-col" parent="robot2/Armature/Skeleton3D" index="4"]
+transform = Transform3D(8.97658e-08, -4.3256e-08, 0.303208, -0.303208, -5.72763e-08, 9.2471e-08, 5.72763e-08, -0.303208, -6.09055e-08, 3.44814e-07, 3.43897, 6.04306e-07)
+
+[node name="belt-long4" parent="." instance=ExtResource("6_5usv6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.73416, -0.0790786, 2.22178)
+
+[node name="tasma" parent="belt-long4" index="1"]
+transform = Transform3D(0.0840699, 0, 0, 0, 0.429667, 0, 0, 0, 0.429667, -0.931744, 0.364174, 0.00432548)
+
+[node name="Start" type="Node3D" parent="belt-long4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.743, 0.382, 0)
+
+[node name="Stop" type="Node3D" parent="belt-long4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17671, 0.382, 0)
+
+[node name="robotY" parent="." instance=ExtResource("8_rn3mu")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.46078, -0.318456, 0.107596)
+
+[node name="belt-long5" parent="." instance=ExtResource("6_5usv6")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.41004, -0.0790781, -6.02558)
+
+[node name="Start" type="Node3D" parent="belt-long5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.743, 0.382, 0)
+
+[node name="Stop" type="Node3D" parent="belt-long5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.712477, 0.382, 0)
+
+[editable path="robot"]
+[editable path="belt-long1"]
+[editable path="belt-long2"]
+[editable path="maszyna-kolorujaca"]
+[editable path="belt-long3"]
+[editable path="robot2"]
+[editable path="belt-long4"]
+[editable path="robotY"]
+[editable path="belt-long5"]

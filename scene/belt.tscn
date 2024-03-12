@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccltmjj3kntcr"]
+
+[ext_resource type="PackedScene" uid="uid://hd38htowqrcn" path="res://Assets/belt.glb" id="1_daotr"]
+
+[node name="belt" instance=ExtResource("1_daotr")]
+
+[node name="AnimationPlayer" parent="." index="2"]
+autoplay = "tasma"

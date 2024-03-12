@@ -1,0 +1,155 @@
+[gd_scene load_steps=8 format=3 uid="uid://cpbiva8a4mufs"]
+
+[ext_resource type="PackedScene" uid="uid://cuqsp7lx45q20" path="res://Assets/robotY.glb" id="1_uilqm"]
+[ext_resource type="Script" path="res://scripts/yaskawaScript.gd" id="2_psa1n"]
+
+[sub_resource type="Animation" id="Animation_5c4q3"]
+resource_name = "get 1-2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:interpolation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_tesbk"]
+resource_name = "get 2-2"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:interpolation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 1.0]
+}
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 1, 0, 4.37114e-08, 0.2, 1, 0, 1, 0, 4.37114e-08, 2, 1, 0, -3.17865e-08, 0, 1)
+
+[sub_resource type="Animation" id="Animation_fw01o"]
+resource_name = "return"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:interpolation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 1.19209e-07, 0, 1, 1, 1, 0, 1, 0, -4.37114e-08)
+
+[sub_resource type="Animation" id="Animation_mp0fr"]
+resource_name = "standby"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:interpolation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 1, 0, 7.5498e-08)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pksvb"]
+_data = {
+"get 1-2": SubResource("Animation_5c4q3"),
+"get 2-2": SubResource("Animation_tesbk"),
+"return": SubResource("Animation_fw01o"),
+"standby": SubResource("Animation_mp0fr")
+}
+
+[node name="robotY" instance=ExtResource("1_uilqm")]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Armature_001" index="0"]
+bones/1/rotation = Quaternion(0.535235, -2.01393e-07, -1.2761e-07, 0.844703)
+bones/2/rotation = Quaternion(0.930561, -6.87208e-14, -4.43726e-07, -0.366138)
+bones/2/scale = Vector3(1, 1, 1)
+bones/3/rotation = Quaternion(0.0405201, 8.6113e-16, -1.93215e-08, 0.999179)
+bones/4/rotation = Quaternion(-0.0202396, 2.3837e-07, 4.8255e-09, 0.999795)
+bones/5/rotation = Quaternion(-0.063375, 2.37923e-07, 1.53284e-08, 0.99799)
+bones/6/rotation = Quaternion(0.00382025, 2.38417e-07, -9.1083e-10, 0.999993)
+bones/7/rotation = Quaternion(-0.0382091, 0.0382094, 0.706074, 0.706074)
+bones/7/scale = Vector3(0.509553, 0.113459, 0.509553)
+
+[node name="Cube_005" parent="Armature_001/Skeleton3D" index="0"]
+transform = Transform3D(0.242216, 2.4869e-14, 1.49214e-13, -2.06057e-13, 0.0661958, 0.181871, -3.90799e-14, -0.181871, 0.0661958, 2.46639e-08, 4.12329, -0.586293)
+
+[node name="Cube_005" parent="Armature_001/Skeleton3D/Cube_005" index="0"]
+transform = Transform3D(1, 1.16415e-09, 0, -4.65661e-10, 1, 0, 0, -7.45058e-09, 1, 0, 0, 0)
+
+[node name="Plane_006" parent="Armature_001/Skeleton3D" index="1"]
+transform = Transform3D(0.000758755, -3.29424e-13, -4.56024e-14, 1.29535e-13, 0.00019705, 0.000732722, -3.06269e-13, -0.000732721, 0.00019705, 0.00304176, 4.36591, -1.29903)
+
+[node name="node3d" type="Node3D" parent="Armature_001/Skeleton3D/Plane_006" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 2.84217e-14, 0, 1, -8.05836e-05, 0, -533.676)
+
+[node name="grabPart" type="MeshInstance3D" parent="Armature_001/Skeleton3D/Plane_006/node3d" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 2.84217e-14, 0, 1, -2.32123e-05, 0, -153.731)
+
+[node name="Cube_0042r-col" parent="Armature_001/Skeleton3D" index="2"]
+transform = Transform3D(0.369791, 5.15143e-14, 1.7053e-13, -1.56319e-13, 0.114964, 0.351467, 1.06581e-14, -0.351467, 0.114964, 1.89986e-08, 3.98947, -0.316571)
+
+[node name="Cube_0042r" parent="Armature_001/Skeleton3D/Cube_0042r-col" index="0"]
+transform = Transform3D(1, 0, 0, -1.16415e-10, 1, -7.45058e-09, 0, -7.45058e-09, 1, 0, 0, 0)
+
+[node name="Cylinder2r-col" parent="Armature_001/Skeleton3D" index="3"]
+transform = Transform3D(-3.45232e-08, -0.113459, -2.51565e-08, 0.266054, 4.96847e-09, -0.43458, 0.43458, -2.3465e-09, 0.266054, -0.0178904, 1.31918, -0.0899131)
+
+[node name="Cylinder2r" parent="Armature_001/Skeleton3D/Cylinder2r-col" index="0"]
+transform = Transform3D(1, 0, 0, -1.86265e-09, 1, -8.3819e-09, -1.49012e-08, -4.87489e-10, 1, 0, 0, 0)
+
+[node name="Cube_002" parent="Armature_001/Skeleton3D" index="4"]
+transform = Transform3D(0.595421, 0, 0, 0, 0.595421, 0, 0, 0, 0.595421, -0.0178903, 0.577824, -0.0107442)
+
+[node name="SkeletonIK3D" type="SkeletonIK3D" parent="Armature_001/Skeleton3D" index="5"]
+process_priority = 1
+root_bone = &"Bone.001"
+tip_bone = &"Plane.006"
+interpolation = 0.0
+target_node = NodePath("../../../Node3D")
+script = ExtResource("2_psa1n")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Armature_001/Skeleton3D/SkeletonIK3D" index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_pksvb")
+}
+
+[node name="Node3D" type="Node3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.81499, -1.94019)

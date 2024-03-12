@@ -13,7 +13,16 @@ config_version=5
 config/name="Projekt Ms"
 run/main_scene="res://scene/mapa.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+boot_splash/bg_color=Color(0.137255, 0.137255, 0.137255, 1)
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://scripts/global.gd"
+
+[display]
+
+window/size/mode=3
 
 [input]
 

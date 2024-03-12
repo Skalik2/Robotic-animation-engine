@@ -1,0 +1,111 @@
+[gd_scene load_steps=13 format=3 uid="uid://crlkqwiimrnn6"]
+
+[ext_resource type="Script" path="res://scripts/CharacterBody3D.gd" id="1_5emks"]
+[ext_resource type="MeshLibrary" uid="uid://dduwntbrqau65" path="res://mesh/sciany mesh.tres" id="2_xyvnl"]
+[ext_resource type="PackedScene" uid="uid://d2hps4l3uj3tj" path="res://scene/robot_2.tscn" id="3_d36h2"]
+[ext_resource type="Script" path="res://scripts/Kostka.gd" id="4_cswvn"]
+[ext_resource type="PackedScene" uid="uid://byubdm3hwxp3a" path="res://scene/belt.tscn" id="5_madrf"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qh1ws"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_i17ok"]
+sky_material = SubResource("ProceduralSkyMaterial_qh1ws")
+
+[sub_resource type="Environment" id="Environment_dxbv6"]
+background_mode = 2
+sky = SubResource("Sky_i17ok")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c1ca0"]
+
+[sub_resource type="GDScript" id="GDScript_8qt5b"]
+script/source = "extends SpotLight3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ym13"]
+albedo_color = Color(0.858824, 0.403922, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_u28hi"]
+
+[node name="Mapa" type="Node3D"]
+
+[node name="stage" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="stage"]
+use_collision = true
+size = Vector3(10, 0.2, 10)
+
+[node name="enviroment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="enviroment"]
+environment = SubResource("Environment_dxbv6")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+script = ExtResource("1_5emks")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0452595, 1.09951, 0.0169668)
+shape = SubResource("CapsuleShape3D_c1ca0")
+
+[node name="head" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00381279, 0, -0.190449)
+current = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CharacterBody3D/head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.394356, 0.454764)
+light_energy = 4.071
+spot_range = 7.25646
+spot_angle = 36.0138
+script = SubResource("GDScript_8qt5b")
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("2_xyvnl")
+cell_size = Vector3(1, 1, 1)
+cell_octant_size = 1
+cell_center_y = false
+data = {
+"cells": PackedInt32Array(65530, 0, 1, 65530, 65534, 1, 65530, 65532, 1, 65530, 65530, 1, 65528, 2, 1, 65528, 0, 1, 65528, 65534, 1, 65528, 65532, 1, 65528, 65530, 1, 65526, 2, 1, 65526, 0, 1, 65526, 65534, 1, 65526, 65532, 1, 65526, 65530, 1, 65524, 2, 1, 65524, 0, 1, 65524, 65534, 1, 65524, 65532, 1, 65524, 65530, 1, 65530, 4, 1441792, 65528, 4, 1441792, 65526, 4, 1441792, 65524, 4, 1441792, 65522, 4, 655362, 65522, 2, 655360, 65522, 0, 655360, 65522, 65534, 655360, 65522, 65532, 655360, 65522, 65530, 655360, 65522, 65528, 1048578, 65524, 65528, 1048576, 65526, 65528, 1048576, 65528, 65528, 1048576, 65530, 65528, 1048576, 65530, 2, 1)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="robot2" parent="." instance=ExtResource("3_d36h2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.0654, 0.118733, 3.75548)
+
+[node name="Kostka" type="StaticBody3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -6.01224, 1.6279, -2.00922)
+script = ExtResource("4_cswvn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Kostka"]
+material_override = SubResource("StandardMaterial3D_1ym13")
+mesh = SubResource("BoxMesh_u28hi")
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="Kostka"]
+polygon = PackedVector2Array(-0.501132, 0.500301, -0.500666, -0.501352, 0.501604, -0.502145, 0.499903, 0.50161)
+
+[node name="belt" parent="." instance=ExtResource("5_madrf")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -9.81036, 0, 4.18645)
+
+[node name="Start" type="Node3D" parent="belt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.23104, 0.464488, 0.509227)
+
+[node name="Stop" type="Node3D" parent="belt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.548524, 0.464488, 0.509228)
+
+[node name="belt2" parent="." instance=ExtResource("5_madrf")]
+transform = Transform3D(2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, -13.471, 0, -3.86612)

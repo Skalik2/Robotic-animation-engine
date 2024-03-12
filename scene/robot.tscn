@@ -1,0 +1,263 @@
+[gd_scene load_steps=14 format=3 uid="uid://b1xeratmt55m3"]
+
+[ext_resource type="PackedScene" uid="uid://dknyav0387gvn" path="res://Assets/robot.glb" id="1_ipx2p"]
+[ext_resource type="Script" path="res://scripts/SkeletonIK3D.gd" id="2_kcwha"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_v0ptu"]
+
+[sub_resource type="Animation" id="Animation_hietv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:interpolation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_lekff"]
+resource_name = "left_swing 1-2"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:interpolation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0.0001, 1, 0, 0, 0, 1, 0.6, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_rdl3o"]
+resource_name = "left_swing 2-2"
+length = 2.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:interpolation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 2.1, 2.5, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+}
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1.5, 1, 0, 0.707107, 0, 0.707107, 2.1, 1, 0, 0.707107, 0, 0.707107, 2.3, 1, 0, 0.707107, 0, 0.707107, 2.9, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_nmoqs"]
+resource_name = "left_swing return"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:interpolation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0, 0.707107, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_162d7"]
+resource_name = "standby"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:interpolation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hwud3"]
+_data = {
+"RESET": SubResource("Animation_hietv"),
+"left_swing 1-2": SubResource("Animation_lekff"),
+"left_swing 2-2": SubResource("Animation_rdl3o"),
+"left_swing return": SubResource("Animation_nmoqs"),
+"standby": SubResource("Animation_162d7")
+}
+
+[sub_resource type="Animation" id="Animation_r3dw2"]
+resource_name = "180_rotation return"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:interpolation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, -0.707107, 0, 0.707107, 1, 1, 0, 0.707107, 0, 0.707107)
+
+[sub_resource type="Animation" id="Animation_h5t2e"]
+resource_name = "180_rotation_get 1-2"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:interpolation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.2, 1.0]
+}
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0, 0.707107, 0.5, 1, 0, 0.707107, 0, 0.707107, 1, 1, 0, 0, 0, 1, 1.2, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_2okpe"]
+resource_name = "180_rotation_get 2-2"
+length = 1.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:interpolation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.2, 1.5, 1.6, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 0.000166655, 0.000166655, 1.0, 1.0, 0.0]
+}
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0, 0.707107, 0.6001, 1, 0, 0.707107, 0, 0.707107, 1.2, 1, 0, -0.707107, 0, 0.707107, 1.7, 1, 0, -0.707107, 0, 0.707107, 2.5, 1, 0, 0.707107, 0, 0.707107)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fhpn6"]
+_data = {
+"180_rotation return": SubResource("Animation_r3dw2"),
+"180_rotation_get 1-2": SubResource("Animation_h5t2e"),
+"180_rotation_get 2-2": SubResource("Animation_2okpe")
+}
+
+[node name="robot" instance=ExtResource("1_ipx2p")]
+
+[node name="CollisionShape3D" parent="Cylinder/StaticBody3D" index="0"]
+transform = Transform3D(0.365779, 0, 0, 0, 0.365779, 0, 0, 0, 0.365779, 0, 0, 0)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Cylinder_002/StaticBody3D" index="1"]
+transform = Transform3D(1.93483, 0, 0, 0, 1.4272, 0, 0, 0, 1.93483, 0, 0, 0)
+shape = SubResource("SphereShape3D_v0ptu")
+
+[node name="Cube_001" parent="Armature/Skeleton3D" index="0"]
+transform = Transform3D(0.317066, -5.58885e-09, 0, 4.5645e-08, 0.0568649, 2.03954e-10, -4.65661e-10, -1.39835e-11, 0.0797477, 2.65266, 2.31698, 6.47214e-07)
+
+[node name="Cube_001" parent="Armature/Skeleton3D/Cube_001" index="0"]
+transform = Transform3D(1, -3.53098e-15, -1.77636e-15, -1.19209e-07, 1, -2.84217e-14, -5.68434e-14, 1.42109e-14, 1, 0, 0, 0)
+
+[node name="GrabPart" type="Node3D" parent="Armature/Skeleton3D/Cube_001/Cube_001" index="0"]
+transform = Transform3D(2.19544, -8.88516e-15, -8.95056e-10, -2.14577e-06, 2.19544, -5.87136e-10, 2.56392e-08, -1.82774e-09, 2.19544, 9.53674e-07, -7.65504, 2.13931e-08)
+
+[node name="MeshGrabPart" type="MeshInstance3D" parent="Armature/Skeleton3D/Cube_001/Cube_001/GrabPart" index="0"]
+transform = Transform3D(1.00517, 7.45058e-09, 1.77636e-15, -1.19209e-07, 1.00517, -2.84217e-14, -1.7053e-13, 1.42109e-14, 1.00517, 0, 0, 0)
+
+[node name="Cylinder_006-col" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(-0.303208, -2.49129e-08, 7.62816e-08, -9.00984e-08, -1.26702e-08, -0.303208, 4.88944e-08, -0.152413, 1.11349e-08, 2.65395, 3.43768, 7.4191e-07)
+
+[node name="Cylinder_006" parent="Armature/Skeleton3D/Cylinder_006-col" index="0"]
+transform = Transform3D(1, -7.10543e-15, 1.64575e-14, 2.13163e-14, 1, 0, 1.59673e-14, 0, 1, 0, 0, 0)
+
+[node name="Cylinder_007" parent="Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.295268, -2.89909e-08, 1.39698e-09, 4.24346e-08, 0.295268, 7.53971e-10, -1.39698e-09, -7.09406e-11, 0.295268, 2.65266, 2.43154, 6.53173e-07)
+
+[node name="Cylinder_007" parent="Armature/Skeleton3D/Cylinder_007" index="0"]
+transform = Transform3D(1, -1.85328e-14, -1.42109e-14, -2.12582e-14, 1, 1.42109e-14, -1.42109e-14, 1.42109e-14, 1, 0, 0, 0)
+
+[node name="Plane_005" parent="Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.0302536, -2.96859e-09, 5.82077e-11, 4.34721e-09, 0.0302536, 7.73639e-11, -1.74623e-10, -7.38964e-12, 0.0302536, 2.59529, 2.27095, 1.43076e-07)
+
+[node name="Plane_005" parent="Armature/Skeleton3D/Plane_005" index="0"]
+transform = Transform3D(1, 1.42109e-14, -3.55271e-15, 2.84217e-14, 1, 4.53409e-16, 0, 5.90149e-17, 1, 0, 0, 0)
+
+[node name="Cylinder_003-col" parent="Armature/Skeleton3D" index="4"]
+transform = Transform3D(1.26059e-07, -4.32603e-08, 0.303208, -0.303208, -5.72763e-08, 1.28749e-07, 5.71599e-08, -0.303208, -6.07635e-08, 3.44814e-07, 3.43897, 6.04306e-07)
+
+[node name="Cylinder_003" parent="Armature/Skeleton3D/Cylinder_003-col" index="0"]
+transform = Transform3D(1, 1.42109e-14, 8.94069e-08, 0, 1, 0, -2.98024e-08, -2.84217e-14, 1, 0, 0, 0)
+
+[node name="Cylinder_001-col" parent="Armature/Skeleton3D" index="5"]
+transform = Transform3D(1, 4.48197e-08, 1.31103e-08, -4.48197e-08, 1, 1.20174e-08, -1.31103e-08, -1.20174e-08, 1, 2.66454e-15, -6.66135e-16, 8.70267e-15)
+
+[node name="Cylinder_001" parent="Armature/Skeleton3D/Cylinder_001-col" index="0"]
+transform = Transform3D(1, 4.65188e-16, 0, 4.65188e-16, 1, 8.88178e-16, 0, 0, 1, 0, 0, 0)
+
+[node name="SkeletonIK3D" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="6"]
+process_priority = 1
+root_bone = &"Bone"
+tip_bone = &"Plane.005"
+target_node = NodePath("../../../Node3D")
+script = ExtResource("2_kcwha")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Armature/Skeleton3D/SkeletonIK3D" index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_hwud3")
+}
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Armature/Skeleton3D/SkeletonIK3D" index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_fhpn6")
+}
+
+[node name="Empty" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.65266, 2.84392, 4.95855e-07)
+
+[node name="Node3D" type="Node3D" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.34653, 0.871344, 0)
